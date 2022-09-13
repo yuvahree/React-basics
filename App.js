@@ -1,13 +1,15 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useState, useEffect } from "react";
-// export default App;
+import { useContext, createContext } from "react";
+// import parent from "./parent";
+import React from "react";
 
 // function App() {
 //   return (
 //     <div className="App">
 //       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
+//         {/* <img src={logo} className="App-logo" alt="logo" />
 //         <p>
 //           Edit <code>src/App.js</code> and save to reload.
 //         </p>
@@ -18,106 +20,212 @@ import { useState, useEffect } from "react";
 //           rel="noopener noreferrer"
 //         >
 //           Learn React
-//         </a>
+//         </a> */}
+//         <h1>Hello, world!</h1>
 //       </header>
 //     </div>
 //   );
 // }
 
-function App() {
-  const initialValues = { username: "", email: "", password: "" };
-  const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
+// export default App;
+// function App() {
+//   const [click, setClick] = useState(0);
+//   // using array destructuring here
+//   // to assign initial value 0
+//   // to click and a reference to the function
+//   // that updates click to setClick
+//   return (
+//     <div>
+//       <p>You clicked {click} times</p>
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
+//       <button onClick={() => setClick(click + 1)}>Click me</button>
+//     </div>
+//   );
+// }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormErrors(validate(formValues));
-    setIsSubmit(true);
-  };
+// export default App;
 
-  useEffect(() => {
-    console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
-    }
-  }, [formErrors]);
-  const validate = (values) => {
-    const errors = {};
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    if (!values.username) {
-      errors.username = "Username is required!";
-    }
-    if (!values.email) {
-      errors.email = "Email is required!";
-    } else if (!regex.test(values.email)) {
-      errors.email = "This is not a valid email format!";
-    }
-    if (!values.password) {
-      errors.password = "Password is required";
-    } else if (values.password.length < 4) {
-      errors.password = "Password must be more than 4 characters";
-    } else if (values.password.length > 10) {
-      errors.password = "Password cannot exceed more than 10 characters";
-    }
-    return errors;
-  };
+// function Greet({ name }) {
+//   const message = `Hello, ${name}!`;
+//   useEffect(() => {
+//     document.title = `Greetings to ${name}`;
+//   }, [name]);
+//   return <div> that is {message}</div>;
+// }
+// export default Greet;
+
+// function RepeatMessage({ message }) {
+//   useEffect(() => {
+//     const id = setInterval(() => {
+//       console.log(message);
+//     }, 2000);
+//     return () => {
+//       clearInterval(id);
+//     };
+//   }, [message]);
+
+//   return <div className="message">I'm logging to console "{message}"</div>;
+// }
+
+// export default function App() {
+//   const [message, setMessage] = useState("Hello, World!");
+
+//   return (
+//     <div className="App">
+//       <h3>Type the message to log to console</h3>
+//       <input
+//         type="text"
+//         value={message}
+//         onChange={(e) => setMessage(e.target.value)}
+//       />
+//       <RepeatMessage message={message} />
+//     </div>
+//   );
+// }
+
+// function App() {
+//   //usestate
+//   const [name, setName] = useState("yyyy");
+//   return <p>hiii {name}</p>;
+// }
+// export default App;
+
+// function Color() {
+//   const [color, setColor] = useState("red");
+
+//   return (
+//     <div>
+//       <h1>My favorite color is {color}!</h1>
+//       <button type="button" onClick={() => setColor("blue")}>
+//         Blue
+//       </button>
+//     </div>
+//   );
+// }
+// export default Color;
+
+// function colors() {
+//   const [colors, setColors] = useState("colors");
+//   return (
+//     <div>
+//       <p>heloooo {colors}!</p>
+//       <button type="button" onClick={() => setColors("pink")}>
+//         pink
+//       </button>
+//     </div>
+//   );
+// }
+// export default colors;
+
+// function Car() {
+//   const [car, setCar] = useState({
+//     brand: "Ford",
+//     model: "Mustang",
+//     color: "red",
+//   });
+// const [brand, setBrand] = useState("Ford");
+// const [model, setModel] = useState("Mustang");
+// const [color, setColor] = useState("pink");
+
+//update brand
+//   const updateBrand = () => {
+//     setCar((previousState) => {
+//       return { ...previousState, brand: "aadi" };
+//     });
+//   };
+//   return (
+//     <div>
+//       <h1>
+//         this is {car.brand} of that {car.model} at of {car.color}
+//       </h1>
+//       <button type="button" onClick={updateBrand}>
+//         aadi
+//       </button>
+//     </div>
+//   );
+// }
+// export default Car;
+
+//use effect
+// function Timer() {
+//   const [count, setCount] = useState(100);
+
+//   useEffect(() => {
+//     setTimeout(() => {
+//       setCount((count) => count + 1);
+//     }, 1000);
+//   }, []);
+
+//   return <h1>I've rendered {count} times!</h1>;
+// }
+// export default Timer;
+
+// const Tutorials = (props) => {
+//   useEffect(() => {
+//     console.log("hello");
+//     setTimeout(() => {
+//       alert("hello");
+//     }, 2000);
+//     return () => {
+//       console.log("cleanup on change player props");
+//     };
+//   }, [props.player]);
+// };
+// export default Tutorials;
+
+//use context
+// export const Context = React.createContext();
+// function App() {
+//   // const [val, setVal] = useState("orange");
+//   return (
+//     <Context.Provider value={"orange"}>
+//       <h1>what's ?</h1>
+//       <div className="border">
+//         <h2>parent </h2>
+//       </div>
+//     </Context.Provider>
+//   );
+// }
+// export default App;
+
+const userDetailContext = React.createContext();
+
+function UserDetails() {
+  const [userDetails] = useState({
+    name: "yyyyy",
+    age: 10,
+    city: "vellore",
+  });
 
   return (
-    <div className="container">
-      {Object.keys(formErrors).length === 0 && isSubmit ? (
-        <div className="ui message success">Signed in successfully</div>
-      ) : (
-        <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
-      )}
+    <userDetailContext.Provider value={userDetails}>
+      <h1>This is the Parent Component</h1>
+      <hr />
+      <Child userDetails={userDetails} />
+    </userDetailContext.Provider>
+  );
+}
 
-      <form onSubmit={handleSubmit}>
-        <h1>Login Form</h1>
-        <div className="ui divider"></div>
-        <div className="ui form">
-          <div className="field">
-            <label>Username</label>
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formValues.username}
-              onChange={handleChange}
-            />
-          </div>
-          <p>{formErrors.username}</p>
-          <div className="field">
-            <label>Email</label>
-            <input
-              type="text"
-              name="email"
-              placeholder="Email"
-              value={formValues.email}
-              onChange={handleChange}
-            />
-          </div>
-          <p>{formErrors.email}</p>
-          <div className="field">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formValues.password}
-              onChange={handleChange}
-            />
-          </div>
-          <p>{formErrors.password}</p>
-          <button className="fluid ui button blue">Submit</button>
-        </div>
-      </form>
+function Child() {
+  return (
+    <div>
+      <h2>This is Child </h2>
+      <hr />
+      <SubChild />
     </div>
   );
 }
 
-export default App;
+function SubChild() {
+  const contextData = React.useContext(userDetailContext);
+  return (
+    <div>
+      <h3>This is Sub Child </h3>
+      <h4>User Name: {contextData.name}</h4>
+      <h4>User Age: {contextData.age}</h4>
+      <h4>User city: {contextData.city}</h4>
+    </div>
+  );
+}
+
+export default UserDetails;
